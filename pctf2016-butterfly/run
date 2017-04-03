@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ "$#" -ne 3 ] ; then
+    echo "Usage: $0 <port> <user> executable>"
+    exit 1
+fi
+
+if [ "$(id -u)" != "0" ] ; then
+    echo "Please run as root"
+    exit 1
+fi
+
+exec socat tcp-listen:$1,fork,reuseaddr,su=$2 exec:$3
