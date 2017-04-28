@@ -1,0 +1,4 @@
+#!/bin/sh
+export MAX_SHELLCODE_SIZE="$1"; shift
+COMMAND="$@"
+exec socat tcp-listen:$PORT,fork,reuseaddr,su=$USER system:"$COMMAND"
